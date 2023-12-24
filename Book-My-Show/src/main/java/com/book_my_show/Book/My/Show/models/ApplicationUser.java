@@ -20,8 +20,6 @@ import java.util.UUID;
 public class ApplicationUser {
     //in hibernate user class is already present so we made application user to prevent error
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
@@ -39,3 +37,5 @@ public class ApplicationUser {
     @OneToMany(mappedBy = "user")//to preventing create same id field which is alreayd get created in user table
     List<Ticket> tickets;
 }
+
+

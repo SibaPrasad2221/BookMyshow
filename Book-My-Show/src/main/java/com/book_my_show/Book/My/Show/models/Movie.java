@@ -26,11 +26,11 @@ public class Movie {
     String actorName;
     String actressName;
     int imdbRating;
-    double duration;
+    double duration; //hours
 
-    @OneToMany
+    @OneToMany(mappedBy = "movie") //if you don't use mapped by it iwll create a 3rd table between between movie and ticket as movie id and ticket id, as ticket id is already used in ticket entity so we use movie object which is used in ticket entity
     List<Ticket> tickets; // i want to get box office collection so no of tickets is needed
 
-    @ManyToOne()
-    Hall hall;
+    @ManyToOne //here many refers the class ie; movie and one refers to another entity
+    ApplicationUser user;     // THAT MEANS one many movies can be played in one hall ie; one hall could have multiple movies running
 }

@@ -19,10 +19,12 @@ public class Screen {
     @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
     String screenName;
-    @OneToMany() // from hall point of view one hall can have multiple screen
+    @ManyToOne() //from screen point of view(because it's a screen entity) multiple screen present in one hall so many to one
     Hall hall; //we need hall id field in screen entity
     int screenCapacity;
     boolean status;
     String type; //2d screen or 3d screen
 
 }
+
+

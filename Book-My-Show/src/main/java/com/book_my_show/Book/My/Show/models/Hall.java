@@ -22,14 +22,17 @@ public class Hall {
     UUID id;
     String name;
     String address;
-    @Column(unique = true)
-    String email;
-    String password;
-    long contactNumber;
+
+    @ManyToOne
+    ApplicationUser user;
 
     @OneToMany(mappedBy = "hall")
-    List<Screen> screen; //because particular hall have multiple screen
+    List<Screen> screens; //because particular hall have multiple screen
 
-    @ManyToOne(mappedBy="hal")
-    List<Show> shows;
+    @OneToMany(mappedBy = "hall") //from shows pov many shows can be listed to one hall, from multiple shows one show
+    List<Show_ent> shows;
+
+    @OneToMany(mappedBy = "hall")
+    List<Ticket> tickets;
 }
+
