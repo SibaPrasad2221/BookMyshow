@@ -24,14 +24,12 @@ public class ApplicationUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
     String name;
-
     @Column(unique = true)
     String email;
-
     @Column(unique = true)
     long phoneNumber;
     String password;
-    String type;
+    String type; //users for this application are of 3 types regular users, movie owner, hallowners
     int age;
 
     @OneToMany(mappedBy = "user")//to preventing create same id field which is alreayd get created in user table

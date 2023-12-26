@@ -32,5 +32,5 @@ public class Movie {
     List<Ticket> tickets; // i want to get box office collection so no of tickets is needed
 
     @ManyToOne //here many refers the class ie; movie and one refers to another entity
-    ApplicationUser user;     // THAT MEANS one many movies can be played in one hall ie; one hall could have multiple movies running
+    ApplicationUser owner;     // many moevies is owned by one owner //mmovie owners are dharma production, redchillis
 }

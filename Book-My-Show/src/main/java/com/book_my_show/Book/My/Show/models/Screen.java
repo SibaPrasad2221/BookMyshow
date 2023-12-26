@@ -22,7 +22,7 @@ public class Screen {
     @ManyToOne() //from screen point of view(because it's a screen entity) multiple screen present in one hall so many to one
     Hall hall; //we need hall id field in screen entity
     int screenCapacity;
-    boolean status;
+    boolean status; //is the screen free now in the current moment or not
     String type; //2d screen or 3d screen
 
 }

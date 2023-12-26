@@ -15,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class Ticket {
-    @Id //to mark this coulm as prim key
+    @Id //to mark this column as prim key
     @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
 

@@ -24,7 +24,8 @@ public class Hall {
     String address;
 
     @ManyToOne
-    ApplicationUser user;
+    ApplicationUser owner; //many halls are handled by one owner /owner may be inox, pvr or local owner
+    //let's say pvr is owner who is responsible for updating pvr halls, inox is a owner is updating inox halls, so pvr user can't do change the halls screen etc properties which is owned by inox
 
     @OneToMany(mappedBy = "hall")
     List<Screen> screens; //because particular hall have multiple screen
