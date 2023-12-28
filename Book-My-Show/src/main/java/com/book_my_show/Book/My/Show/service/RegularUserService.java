@@ -24,4 +24,8 @@ public class RegularUserService {
 
         return user;
     }
+
+    public ApplicationUser getUserByEmail(String email){
+        return regularUserRepo.findByEmail(email);
+    }
 }
