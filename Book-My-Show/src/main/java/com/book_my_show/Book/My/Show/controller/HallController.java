@@ -45,5 +45,10 @@ public class HallController {
         return new ResponseEntity(new GeneralMessageDTO("Screen added successfully"), HttpStatus.CREATED); //201
     }
 
+    @PostMapping("/addShow")
+    public ResponseEntity createShow(@RequestBody AddScreenDTO addScreenDTO, @RequestParam String email){
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
 
 }

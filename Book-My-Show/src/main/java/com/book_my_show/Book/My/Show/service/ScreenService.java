@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ScreenService {
 
@@ -15,5 +17,9 @@ public class ScreenService {
 
     public void registerScreen(Screen screen){
         screenRepo.save(screen);
+    }
+
+    public void bookScreen(UUID id){
+        screenRepo.bookScreen(id);
     }
 }
