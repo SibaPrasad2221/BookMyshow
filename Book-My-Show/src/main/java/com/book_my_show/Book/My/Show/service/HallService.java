@@ -9,7 +9,6 @@ import com.book_my_show.Book.My.Show.exception.UserDoesNotExistException;
 import com.book_my_show.Book.My.Show.models.*;
 import com.book_my_show.Book.My.Show.repository.ApplicationUser_Repo;
 import com.book_my_show.Book.My.Show.repository.Hall_Repo;
-import com.book_my_show.Book.My.Show.repository.Movie_Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,11 +93,10 @@ public class HallService {
             screenService.registerScreen(screen);
         }
 
-
     }
 
-    public Show_ent createShow(AddShowDTO addShowDTO, String email){ //email is hallowner's email who is going to do this opration
-        //validate email : present in appalication user repo or not
+    public Show_ent createShow(AddShowDTO addShowDTO, String email){ //email is hallOwner's email who is going to do this opration
+        //validate email : present in application user repo or not
         ApplicationUser user = applicationUser_repo.findByEmail(email);
         if(user==null){
             throw new UserDoesNotExistException(String.format("User with id %s doesn't exist in system", email));
@@ -117,7 +115,7 @@ public class HallService {
         }
 
         //validate user owns this hall or not
-        if(hall.getId() !=  user.getId()){
+        if(hall.getOwner().getId() !=  user.getId()){
             throw new UnAuthorizedException(String.format("User with email id %s doesnot won hall with hallid %s",email, hallId.toString()));
         }
 
@@ -131,7 +129,7 @@ public class HallService {
 
         //get screens that are not occupied
         List<Screen> screens = new ArrayList<>();
-        for(Screen screen: screens){
+        for(Screen screen: hall.getScreens()){
             if(screen.isStatus()==false){
                 screens.add(screen);
 //                screen.setStatus(true);
@@ -143,7 +141,6 @@ public class HallService {
         if(screens.size()==0){
             throw new ResourceNotExistException(String.format("Hall with hall id %s doesn't have any allocated screens",hallId.toString()));
         }
-
 
         Screen screen = screens.get(0);
 

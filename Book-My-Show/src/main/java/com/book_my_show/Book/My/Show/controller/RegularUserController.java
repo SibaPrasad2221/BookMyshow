@@ -7,10 +7,7 @@ import com.book_my_show.Book.My.Show.service.RegularUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user") //defining base controller
@@ -24,6 +21,8 @@ public class RegularUserController {
         ApplicationUser user = regularUserService.SignUp(regularUserSignupDto);
         return new ResponseEntity(user, HttpStatus.CREATED); //once user got created it will show http status code for created
     }
+
+
 
 
 

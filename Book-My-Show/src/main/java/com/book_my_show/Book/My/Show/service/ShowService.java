@@ -6,6 +6,9 @@ import com.book_my_show.Book.My.Show.repository.Show_Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class ShowService {
     @Autowired
@@ -13,5 +16,9 @@ public class ShowService {
 
     public void createShow(Show_ent show){
         showRepo.save(show);
+    }
+
+    public List<Show_ent> getShowsBymovieId(UUID movieId){
+        return showRepo.getShowBymovieId(movieId);
     }
 }

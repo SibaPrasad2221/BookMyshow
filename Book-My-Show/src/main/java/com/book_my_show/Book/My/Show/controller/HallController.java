@@ -3,7 +3,7 @@ package com.book_my_show.Book.My.Show.controller;
 import com.book_my_show.Book.My.Show.dto.request.AddScreenDTO;
 import com.book_my_show.Book.My.Show.dto.request.AddShowDTO;
 import com.book_my_show.Book.My.Show.dto.request.HallOwner_SignUp_DTO;
-import com.book_my_show.Book.My.Show.dto.request.MovieOwner_SignUp_DTO;
+
 import com.book_my_show.Book.My.Show.dto.response.GeneralMessageDTO;
 import com.book_my_show.Book.My.Show.exception.ResourceNotExistException;
 import com.book_my_show.Book.My.Show.exception.UnAuthorizedException;
@@ -11,8 +11,6 @@ import com.book_my_show.Book.My.Show.exception.UserDoesNotExistException;
 import com.book_my_show.Book.My.Show.models.ApplicationUser;
 import com.book_my_show.Book.My.Show.models.Show_ent;
 import com.book_my_show.Book.My.Show.service.HallService;
-import com.book_my_show.Book.My.Show.service.MovieService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

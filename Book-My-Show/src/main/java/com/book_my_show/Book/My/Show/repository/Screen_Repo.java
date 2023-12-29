@@ -16,6 +16,6 @@ public interface Screen_Repo extends JpaRepository<Screen, UUID> {
     @Transactional // we are doing some transaction in the data base
     @Modifying // as we are modifying something in the database
 
-    @Query(value = "update screen set status=true where id = screenId; ", nativeQuery = true)
+    @Query(value = "update screen set status=true where id =:screenId", nativeQuery = true)
     public void bookScreen(UUID screenId);
 }

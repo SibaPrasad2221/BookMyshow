@@ -25,12 +25,15 @@ public class Show_ent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
 
+    @JsonIgnore //to remove the error in postman while hitting for show
     @ManyToOne
     Hall hall;
 
+    @JsonIgnore
     @ManyToOne
     Movie movie;
 
+    @JsonIgnore
     @ManyToOne
     Screen screen;
 
