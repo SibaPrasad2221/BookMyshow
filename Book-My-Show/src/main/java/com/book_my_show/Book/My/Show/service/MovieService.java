@@ -4,6 +4,7 @@ package com.book_my_show.Book.My.Show.service;
 import com.book_my_show.Book.My.Show.dto.request.MovieOwner_SignUp_DTO;
 import com.book_my_show.Book.My.Show.models.ApplicationUser;
 import com.book_my_show.Book.My.Show.models.Movie;
+import com.book_my_show.Book.My.Show.models.Ticket;
 import com.book_my_show.Book.My.Show.repository.ApplicationUser_Repo;
 import com.book_my_show.Book.My.Show.repository.Movie_Repo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,16 @@ public class MovieService {
 
     public Movie getMovieById(UUID id){
         return movieRepo.findById(id).orElse(null);
+    }
+
+    public int getTotalTicketCount(Movie movie){
+        return movie.getTickets().size();
+    }
+    public int boxOfficeCollection(Movie movie){
+        int totalIncome = 0;
+        for(Ticket tickets: movie.getTickets()){
+            totalIncome += tickets.getShow().getTicketPrice();
+        }
+        return totalIncome;
     }
 }

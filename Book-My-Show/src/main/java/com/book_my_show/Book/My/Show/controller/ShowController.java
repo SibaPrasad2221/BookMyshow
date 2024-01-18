@@ -23,16 +23,19 @@ public class ShowController {
 
     @GetMapping("/search")
     public ResponseEntity searchShowByMovieId(@RequestParam(required = false) UUID movieId, @RequestParam(required = false) UUID hallId){
-        //required = false means while post man call weather you fill that field or keep it empty it still works
+        //required = false means while post man call weather you fill that field or keep it empty it still work
 
         if(movieId != null && hallId != null ){
             //search for both movie id and hall id
-            return new ResponseEntity("Please pass atleast one parameter", HttpStatus.NOT_ACCEPTABLE);
+            List<Show_ent> shows = showService.getShowByhallIdANDmovieId(movieId, hallId);
+            return new ResponseEntity(shows, HttpStatus.OK);
         }
         else if(movieId == null && hallId !=null ){
             //if user want to search by only hall id
-            return new ResponseEntity("Please pass atleast one parameter", HttpStatus.NOT_ACCEPTABLE);
+            List<Show_ent> shows = showService.getShowByHallId(hallId);
+            return new ResponseEntity(shows, HttpStatus.OK);
         }
+
         else if(movieId != null && hallId == null){
             //want to search by movie id
             List<Show_ent> shows = showService.getShowsBymovieId(movieId);
