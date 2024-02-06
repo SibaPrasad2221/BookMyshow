@@ -1,5 +1,7 @@
 package com.book_my_show.Book.My.Show.controller;
 
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.Parameters;
 import com.book_my_show.Book.My.Show.models.Show_ent;
 import com.book_my_show.Book.My.Show.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,22 +9,28 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("/show")
 public class ShowController {
 
     @Autowired
     ShowService showService;
 
+
+//    @Parameters({
+//            @Parameter(name = "movieId", description = "It accepts only UUID", required = true),
+//            @Parameter(name = "hallId", description = "It accepts only UUID")
+//    })
+
+
+
     @GetMapping("/search")
-    public ResponseEntity searchShowByMovieId(@RequestParam(required = false) UUID movieId, @RequestParam(required = false) UUID hallId){
+    public ResponseEntity searchShowByMovieId(@RequestParam(required = false, defaultValue = "xyz") UUID movieId, @RequestParam(required = false,defaultValue = "zyx") UUID hallId){
         //required = false means while post man call weather you fill that field or keep it empty it still work
 
         if(movieId != null && hallId != null ){

@@ -6,6 +6,7 @@ import com.book_my_show.Book.My.Show.exception.UserDoesNotExistException;
 import com.book_my_show.Book.My.Show.models.*;
 import com.book_my_show.Book.My.Show.repository.ApplicationUser_Repo;
 import com.book_my_show.Book.My.Show.repository.Ticket_Repo;
+import com.google.zxing.qrcode.QRCodeWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,9 @@ public class TicketService {
 
     @Autowired
     MailService mailService;
+
+    @Autowired
+    BarcodeGenerationService barcodeGenerationService;
 
     public Ticket buyTicket(String email, UUID showId){
         //1. Get user by email id
@@ -75,8 +79,35 @@ public class TicketService {
                 "Team BookMeraShow", user.getName(), movie.getName(), hall.getName(), hall.getAddress(), show.getStartTime().toString(),
                 show.getTicketPrice());
 
+
         String mailsub = String.format("Congratulations %s !! Your ticket is booked", user.getName());
-        mailService.generateMail(user.getEmail(), mailsub, userMessage);
+
+        try{
+            barcodeGenerationService.generateQR(userMessage);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+//        mailService.generateMail(user.getEmail(), mailsub, userMessage);
+
+        //polymorphism- method overloading
+        String path = "C:\\Users\\sahoo\\Downloads\\Book My Show\\Book-My-Show\\src\\main\\resources\\static\\QRcode.png";
+        mailService.generateMail(user.getEmail(),mailsub, userMessage,path);
+
+
+
+        //send box office collection to movie owner
+        int total_tickets = movieService.getTotalTicketCount(movie);
+        int total_income = movieService.boxOfficeCollection(movie);
+
+        String movie_mes = String.format("Hii %s \n"+
+                "Congratulations!! Your ticket got sold\n"+
+                "Total Ticket sold: %d"+
+                "Total Income: %d", movie.getOwner().getName(), total_tickets, total_income);
+
+        String movieSubject = String.format("Congratulations !! %s One more ticket got sold", movie.getOwner().getName());
+
+        mailService.generateMail(movie.getOwner().getEmail(), movieSubject, movie_mes );
         return ticket;
     }
 }

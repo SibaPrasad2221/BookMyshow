@@ -1,4 +1,4 @@
-package com.bookmyshow.Book.My.Show.service;
+package com.book_my_show.Book.My.Show.service;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -14,8 +14,8 @@ import java.nio.file.Path;
 
 @Getter
 @Service
-public class BarCodeGeberationService {
-    private static final String qrLocation = "./src/main/resources/static/QRcode.png";
+public class BarcodeGenerationService {
+    private static final String qrLocation = "C:\\Users\\sahoo\\Downloads\\Book My Show\\Book-My-Show\\src\\main\\resources\\static\\QRcode.png";
     private static int hieght = 250;
     private static int width = 250;
 
